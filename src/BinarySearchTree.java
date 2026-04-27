@@ -37,7 +37,7 @@ public class BinarySearchTree {
         if (current == null) {
             return null;
         }
-        if (current.getPlayer().getNickname().equals(name)) {
+        if (current.getPlayer().getNickname().equalsIgnoreCase(name)) {
             return current;
         }
         Node leftSearch = search(current.getLeft(), name);
