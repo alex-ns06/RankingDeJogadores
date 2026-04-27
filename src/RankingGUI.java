@@ -17,6 +17,9 @@ public class RankingGUI extends JFrame {
         setLayout(new BorderLayout());
 
         treePanel = new TreePanel(tree);
+        treePanel.setPreferredSize(new Dimension(4000, 3000));
+
+        JScrollPane scrollPane = new JScrollPane(treePanel);
 
         JPanel painelTopo = new JPanel();
         painelTopo.setLayout(new FlowLayout());
@@ -37,7 +40,7 @@ public class RankingGUI extends JFrame {
         painelTopo.add(botaoRemover);
 
         add(painelTopo, BorderLayout.NORTH);
-        add(treePanel, BorderLayout.CENTER);
+        add(scrollPane, BorderLayout.CENTER);
 
         botaoInserir.addActionListener(e -> inserirJogador());
         botaoBuscar.addActionListener(e -> buscarJogador());

@@ -24,7 +24,7 @@ public class TreePanel extends JPanel {
 
         if (node.getLeft() != null) {
             int filhoX = x - distancia;
-            int filhoY = y + 80;
+            int filhoY = y + 130;
             g.setColor(Color.BLACK);
             g.drawLine(x, y, filhoX, filhoY);
             desenharNo(g, node.getLeft(), filhoX, filhoY, distancia / 2);
@@ -32,17 +32,17 @@ public class TreePanel extends JPanel {
 
         if (node.getRight() != null) {
             int filhoX = x + distancia;
-            int filhoY = y + 80;
+            int filhoY = y + 130;
             g.setColor(Color.BLACK);
             g.drawLine(x, y, filhoX, filhoY);
             desenharNo(g, node.getRight(), filhoX, filhoY, distancia / 2);
         }
 
         g.setColor(new Color(70, 150, 220));
-        g.fillOval(x - 30, y - 30, 60, 60);
+        g.fillOval(x - 50, y - 50, 100, 100);
 
         g.setColor(Color.BLACK);
-        g.drawOval(x - 30, y - 30, 60, 60);
+        g.drawOval(x - 50, y - 50, 100, 100);
 
         String texto = node.getPlayer().getNickname();
         FontMetrics fm = g.getFontMetrics();

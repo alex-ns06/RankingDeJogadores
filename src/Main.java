@@ -9,35 +9,33 @@ public class Main {
         String caminhoArquivo = "assets/players.csv";
 
         try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
-            String texto = "";
             String linha = br.readLine();
 
-            while (linha != null) {
-                texto += linha + " ";
+            if (linha != null && linha.contains("nickname")) {
                 linha = br.readLine();
             }
 
-            texto = texto.replace("\uFEFF", "");
-            texto = texto.replace("nickname,ranking", "");
-            texto = texto.trim();
+            while (linha != null) {
+                linha = linha.replace("\uFEFF", "").trim();
 
-            String[] jogadores = texto.split("\\s+");
+                if (!linha.isEmpty()) {
+                    String[] dados = linha.split(",");
 
-            for (String jogador : jogadores) {
-                String[] dados = jogador.split(",");
-
-                if (dados.length == 2) {
-                    String nickname = dados[0].trim();
-                    int ranking = Integer.parseInt(dados[1].trim());
-
-                    arvoreJogadores.insert(new Player(nickname, ranking));
+                    if (dados.length == 2) {
+                        String nickname = dados[0].trim();
+                        try {
+                            int ranking = Integer.parseInt(dados[1].trim());
+                            arvoreJogadores.insert(new Player(nickname, ranking));
+                        } catch (NumberFormatException e) {
+                            System.out.println("Erro ao ler o ranking do jogador: " + nickname + ". Linha ignorada.");
+                        }
+                    }
                 }
+                linha = br.readLine();
             }
 
         } catch (IOException e) {
-            System.out.println("Erro ao abrir o arquivo CSV.");
-        } catch (NumberFormatException e) {
-            System.out.println("Erro em algum ranking do arquivo CSV.");
+            System.out.println("Erro ao abrir ou ler o arquivo CSV: " + e.getMessage());
         }
 
         SwingUtilities.invokeLater(() -> {
