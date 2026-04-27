@@ -5,6 +5,7 @@ public class BinarySearchTree {
         this.root = null;
     }
 
+    
     public Node getRoot() {
         return root;
     }
